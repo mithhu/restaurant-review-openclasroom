@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Homepage } from './Homepage';
 import { StreetViewComponent } from './components/StreetViewComponent';
 
@@ -12,8 +12,7 @@ const App = () => (
         render={() => <Homepage />}
       />
       <Route
-        // exact
-        path="/location"
+        path="/:place"
         render={() => <StreetViewComponent />}
       />
     </Switch>

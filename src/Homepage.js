@@ -1,5 +1,5 @@
 import React from 'react';
-import { MapComponent } from './components/MyMapComponent';
+import { MapComponent } from './components/MapComponent';
 import { RestaurantList } from './components/RestaurantList';
 
 export const Homepage = () => (

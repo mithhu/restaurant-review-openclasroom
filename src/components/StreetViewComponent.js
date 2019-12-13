@@ -1,53 +1,50 @@
 import React, { useEffect, useState } from 'react';
 import ReactStreetview from 'react-streetview';
+import { withRouter, Redirect } from "react-router-dom";
 
-export const StreetViewComponent = (props) => {
-    const [location, setLocation] = useState({
-        lat: 10, lng: 17.8951832
-    })
-    const getLocation = () => {
-        let url_string = window.location.href;
-        let url = new URL(url_string);
-        let lat = parseFloat(url.searchParams.get("lat"));
-        console.log(lat)
-        let long = parseFloat(url.searchParams.get("long"));
-        console.log(lat, long);
-        setLocation({
-            ...location,
-            lat: lat, lng: long
-        })
 
-        console.log(location)
-        // return location
-    }
+const StreetViewComponentView = (props) => {
+    console.log(props)
     // see https://developers.google.com/maps/documentation/javascript
     const googleMapsApiKey = "AIzaSyDGIUkILRvAVhTd5XI4j4M471uNZJmxVLs";
 
     // see https://developers.google.com/maps/documentation/javascript/3.exp/reference#StreetViewPanoramaOptions
-    const streetViewPanoramaOptions = {
-        position: { lat: location.lat, lng: location.lng },
-        pov: { heading: 100, pitch: 0 },
-        zoom: 1
-    };
-
-    useEffect(() => {
-        getLocation();
-        // console.log(loc)
-
-        // console.log(`nfj, ${location}`)
-    }, [])
-
+    let streetViewPanoramaOptions;
+    if (props.location.state) {
+        streetViewPanoramaOptions = {
+            position: {
+                lat: props.location.state.lat, lng: props.location.state.lng
+            },
+            pov: { heading: 100, pitch: 0 },
+            zoom: 1
+        };
+    }
     return (
-        <div style={{
-            width: '800px',
-            height: '450px',
-            backgroundColor: '#eeeeee'
-        }}>
-            <ReactStreetview
-                apiKey={googleMapsApiKey}
-                streetViewPanoramaOptions={streetViewPanoramaOptions}
-            />
+        <div style={{ display: "flex" }}>
+            <div style={{
+                width: '50vw',
+                height: '100vh',
+                backgroundColor: '#eeeeee'
+            }}>
+                {props.location.state ?
+                    (<ReactStreetview
+                        apiKey={googleMapsApiKey}
+                        streetViewPanoramaOptions={streetViewPanoramaOptions}
+                    />) : (<Redirect to="/" />)
+                }
+            </div>
+            {props.location.state && (
+                <div style={{ width: "50vw", textAlign: "center" }}>
+                    <h1>Review</h1>
+                    {props.location.state.reviews.map(review => (
+                        <p>"{review.comment}"</p>
+                    ))}
+                </div>
+            )}
+
         </div>
     );
 }
+
+export const StreetViewComponent = withRouter(StreetViewComponentView)
 
