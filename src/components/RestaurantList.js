@@ -1,22 +1,13 @@
 import React, { useState } from 'react';
 import * as restaurantInfo from './restaurant.json';
 import { Link, Redirect, NavLink } from "react-router-dom";
+import { averageStar } from '../Homepage'
 
-
-export const RestaurantList = () => {
-    const averageStar = (ratings) => {
-        let totalStar = 0;
-        let avgStar;
-        ratings.map((rating) => {
-            totalStar = totalStar + rating.stars
-        })
-        avgStar = totalStar / ratings.length
-        return avgStar;
-    }
+export const RestaurantList = (props) => {
     return (
         <div style={{ width: "50vw", textAlign: "center" }}>
             <h2>Restaurant List</h2>
-            {restaurantInfo.data.map(restaurant => (
+            {props.filteredData.map(restaurant => (
                 <div>
                     <NavLink
                         style={{ marginRight: "20px" }}
@@ -40,3 +31,7 @@ export const RestaurantList = () => {
         </div>
     )
 }
+// let c = a.data.map(res => res.ratings.filter(star => star.stars < 5))
+// let d = a.data.filter(d=> averageStar(d.ratings) < 4.1)
+
+

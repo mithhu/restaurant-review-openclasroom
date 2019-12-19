@@ -9,7 +9,7 @@ import {
   InfoWindow
 } from "react-google-maps";
 
-function Map() {
+function Map(props) {
   const getLocation = () => {
     navigator.geolocation.getCurrentPosition(async position => {
       let lat = await position.coords.latitude;
@@ -35,7 +35,8 @@ function Map() {
       <Marker
         position={location}
       />
-      {restaurantInfo.data.map(restaurant => (
+
+      {props.filteredData.map(restaurant => (
         <Marker
           position={{
             lat: restaurant.lat,
