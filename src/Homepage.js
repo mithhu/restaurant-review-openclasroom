@@ -20,10 +20,10 @@ export const Homepage = () => {
 
     const handleStar = (event, setStar) => {
         if (!event.target.value) {
-            setStar(0)
+            setStar(1)
         }
-        else if (event.target.value < 0) {
-            setStar(0)
+        else if (event.target.value < 1) {
+            setStar(1)
         } else if (event.target.value > 5) {
             setStar(5)
         } else {
