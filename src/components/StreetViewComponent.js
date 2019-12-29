@@ -33,14 +33,14 @@ const StreetViewComponentView = (props) => {
                     />) : (<Redirect to="/" />)
                 }
             </div>
-            {props.location.state && (
-                <div style={{ width: "50vw", textAlign: "center" }}>
-                    <h1>Review</h1>
-                    {props.location.state.reviews.map(review => (
+            <div style={{ width: "50vw", textAlign: "center" }}>
+                <h1>Review</h1>
+                {props.location.state.reviews ?
+                    props.location.state.reviews.map(review => (
                         <p>"{review.comment}"</p>
-                    ))}
-                </div>
-            )}
+                    )) : undefined
+                }
+            </div>
 
         </div>
     );

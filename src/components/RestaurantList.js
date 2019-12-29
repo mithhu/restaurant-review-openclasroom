@@ -18,9 +18,8 @@ export const RestaurantList = (props) => {
                                 lng: restaurant.long,
                                 reviews: restaurant.ratings
                             }
-                            // component=
                         }}>
-                        {restaurant.restaurantName}:
+                        {restaurant.restaurantName ? restaurant.restaurantName : "Unknown"}:
                     </NavLink>
                     <span>
                         {averageStar(restaurant.ratings)}

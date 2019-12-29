@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import * as restaurantInfo from './restaurant.json';
 import { Link, Redirect, NavLink } from "react-router-dom";
 import {
   withGoogleMap,
@@ -8,6 +7,7 @@ import {
   Marker,
   InfoWindow
 } from "react-google-maps";
+import { RestaurantList } from "./RestaurantList.js";
 
 function Map(props) {
   const getLocation = () => {
@@ -27,59 +27,77 @@ function Map(props) {
   const [location, setLocation] = useState(null);
   const [selectedPark, setSelectedPark] = useState(null);
 
-  return (
-    <GoogleMap
-      defaultZoom={15}
-      center={location === null ? { lat: 10, lng: 20 } : location}
-    >
-      <Marker
-        position={location}
-      />
+  let [restaurantList, setRestaurantList] = useState(props.filteredData);
+  const addRestaurant = (lat, lng) => {
+    restaurantList = [...restaurantList, {
+      lat: lat, long: lng, "ratings": [
+        {
+          "stars": 4,
+          "comment": "Great Place!"
+        }]
+    }]
+    setRestaurantList(restaurantList);
+  }
 
-      {props.filteredData.map(restaurant => (
+  return (
+    <div>
+      <GoogleMap
+        defaultZoom={15}
+        center={location === null ? { lat: 10, lng: 20 } : location}
+        onClick={(event) => addRestaurant(event.latLng.lat(), event.latLng.lng())}
+      >
         <Marker
-          position={{
-            lat: restaurant.lat,
-            lng: restaurant.long
-          }}
-          onClick={() => setSelectedPark(restaurant)}
-          icon={{
-            url: `/resicon.png`,
-            scaledSize: new window.google.maps.Size(25, 25)
-          }}
+          position={location}
         />
-      ))}
-      {selectedPark && (
-        <InfoWindow
-          onCloseClick={() => {
-            setSelectedPark(null);
-          }}
-          position={{
-            lat: selectedPark.lat,
-            lng: selectedPark.long
-          }}
-        >
-          <div>
-            <h2>{selectedPark.restaurantName}</h2>
-            <p>{selectedPark.address}</p>
-            <NavLink
-              // style={{ marginRight: "20px" }}
-              to={{
-                pathname: `place/?lat=${selectedPark.lat}&long=${selectedPark.long}`,
-                state: {
-                  lat: selectedPark.lat,
-                  lng: selectedPark.long,
-                  reviews: selectedPark.ratings
-                }
-                // component=
-              }}>
-              {selectedPark.restaurantName}:
+
+        {
+          restaurantList.map(restaurant => (
+            < Marker
+              position={{
+                lat: restaurant.lat,
+                lng: restaurant.long
+              }}
+              onClick={() => setSelectedPark(restaurant)}
+              icon={{
+                url: `/resicon.png`,
+                scaledSize: new window.google.maps.Size(25, 25)
+              }}
+            />
+          ))
+        }
+        {
+          selectedPark && (
+            <InfoWindow
+              onCloseClick={() => {
+                setSelectedPark(null);
+              }}
+              position={{
+                lat: selectedPark.lat,
+                lng: selectedPark.long
+              }}
+            >
+              <div>
+                <h2>{selectedPark.restaurantName}</h2>
+                <p>{selectedPark.address}</p>
+                <NavLink
+                  // style={{ marginRight: "20px" }}
+                  to={{
+                    pathname: `place/?lat=${selectedPark.lat}&long=${selectedPark.long}`,
+                    state: {
+                      lat: selectedPark.lat,
+                      lng: selectedPark.long,
+                      reviews: selectedPark.ratings ? selectedPark.ratings : undefined
+                    }
+                  }}>
+                  Show on the map:
                     </NavLink>
-            {/* <button onClick={}>See details</button> */}
-          </div>
-        </InfoWindow>
-      )}
-    </GoogleMap>
+              </div>
+            </InfoWindow>
+          )
+        }
+      </GoogleMap >
+      <RestaurantList filteredData={restaurantList} />
+    </div>
   );
 }
 

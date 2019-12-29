@@ -39,17 +39,14 @@ export const Homepage = () => {
                 <input type="Number" value={endStar} onChange={(event) => handleStar(event, setEndStar)} />
 
             </div>
-            <div style={{ width: "100vw", height: "100vh", display: "flex" }}>
+            <div style={{ width: "100vw", height: "100vh" }}>
                 <MapComponent
                     filteredData={filteredData}
                     googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyDGIUkILRvAVhTd5XI4j4M471uNZJmxVLs`}
                     // googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyDIbu1WPS897YADSUKInoemwlnJvYikI9k`}
                     loadingElement={<div style={{ height: `100%`, width: "50vw" }} />}
-                    containerElement={<div style={{ height: `100%`, width: "50vw" }} />}
+                    containerElement={<div style={{ height: `100%`, width: "50vw", display: "-webkit-box" }} />}
                     mapElement={<div style={{ height: `100%`, width: "50vw" }} />}
-                />
-                <RestaurantList
-                    filteredData={filteredData}
                 />
             </div>
         </>
