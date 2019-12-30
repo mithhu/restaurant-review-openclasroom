@@ -7,6 +7,7 @@ import {
   Marker,
   InfoWindow
 } from "react-google-maps";
+import Modal from 'react-modal';
 import { RestaurantList } from "./RestaurantList.js";
 
 function Map(props) {
@@ -26,6 +27,7 @@ function Map(props) {
 
   const [location, setLocation] = useState(null);
   const [selectedPark, setSelectedPark] = useState(null);
+  const [form, setForm] = useState(false);
 
   let [restaurantList, setRestaurantList] = useState(props.filteredData);
   const addRestaurant = (lat, lng) => {
@@ -37,7 +39,31 @@ function Map(props) {
         }]
     }]
     setRestaurantList(restaurantList);
+    setForm(true)
   }
+
+  const customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)'
+    }
+  };
+  const [star, setStar] = useState(1);
+
+  // const handleStar = (event, setStar) => {
+  //   if (event.target.value < 0) {
+  //     setStar(1)
+  //   } else if (event.target.value > 5) {
+  //     setStar(5)
+  //   } else {
+  //     console.log('hh')
+  //     setStar(event.target.value)
+  //   }
+  // }
 
   return (
     <div>
@@ -52,7 +78,7 @@ function Map(props) {
 
         {
           restaurantList.map(restaurant => (
-            < Marker
+            <Marker
               position={{
                 lat: restaurant.lat,
                 lng: restaurant.long
@@ -80,7 +106,7 @@ function Map(props) {
                 <h2>{selectedPark.restaurantName}</h2>
                 <p>{selectedPark.address}</p>
                 <NavLink
-                  // style={{ marginRight: "20px" }}
+                  style={{ marginRight: "20px" }}
                   to={{
                     pathname: `place/?lat=${selectedPark.lat}&long=${selectedPark.long}`,
                     state: {
@@ -95,6 +121,32 @@ function Map(props) {
             </InfoWindow>
           )
         }
+        <Modal
+          style={customStyles}
+
+          isOpen={form}>
+          <h2>Add a restaurant</h2>
+          <form>
+            <div>
+
+              <span style={{ paddingRight: "10px" }}>Restaurant name: </span><input type="text" />
+            </div>
+            <div>
+              <span style={{ paddingRight: "10px" }}>Restaurant ratings: </span>
+              <input
+                type="Number"
+                min="1" max="5"
+                value={star}
+                onChange={(event) => setStar(event.target.value)}
+              />
+            </div>
+            <div>
+
+              <button>Add</button>
+            </div>
+
+          </form>
+        </Modal>
       </GoogleMap >
       <RestaurantList filteredData={restaurantList} />
     </div>

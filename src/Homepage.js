@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { MapComponent } from './components/MapComponent';
 import { RestaurantList } from './components/RestaurantList';
-// import Ratings from './components/Ratings';
 import * as restaurantInfo from './components/restaurant.json';
+
 export const averageStar = (ratings) => {
     let totalStar = 0;
     let avgStar;

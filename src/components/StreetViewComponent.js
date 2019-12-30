@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ReactStreetview from 'react-streetview';
-import { withRouter, Redirect } from "react-router-dom";
+import { withRouter, Redirect, NavLink } from "react-router-dom";
 
 
 const StreetViewComponentView = (props) => {
@@ -30,38 +30,43 @@ const StreetViewComponentView = (props) => {
         };
     }
     return (
-        <div style={{ display: "flex" }}>
-            <div style={{
-                width: '50vw',
-                height: '100vh',
-                backgroundColor: '#eeeeee'
-            }}>
-                {props.location.state ?
-                    (<ReactStreetview
-                        apiKey={googleMapsApiKey}
-                        streetViewPanoramaOptions={streetViewPanoramaOptions}
-                    />) : (<Redirect to="/" />)
-                }
+        <>
+            {/* <NavLink>Home</NavLink> */}
+            <NavLink to="/">Home</NavLink>
+            <div style={{ display: "flex" }}>
+                <div style={{
+                    width: '50vw',
+                    height: '100vh',
+                    backgroundColor: '#eeeeee'
+                }}>
+                    }
+                    {props.location.state ?
+                        (<ReactStreetview
+                            apiKey={googleMapsApiKey}
+                            streetViewPanoramaOptions={streetViewPanoramaOptions}
+                        />) : (<Redirect to="/" />)
+                    }
+                </div>
+                <div style={{ width: "50vw", textAlign: "center" }}>
+                    <h1>Review</h1>
+                    {reviewList ?
+                        reviewList.map(review => (
+                            <>
+                                <p>"{review.comment}"</p>
+                            </>
+                        )
+
+                        ) : undefined
+                    }
+                    <form>
+
+                        <input type="text" value={review} onChange={(event) => setReview(event.target.value)}></input>
+                        <button onClick={(event) => reviewSubmit(event)}>Submit</button>
+                    </form>
+                </div>
+
             </div>
-            <div style={{ width: "50vw", textAlign: "center" }}>
-                <h1>Review</h1>
-                {reviewList ?
-                    reviewList.map(review => (
-                        <>
-                            <p>"{review.comment}"</p>
-                        </>
-                    )
-
-                    ) : undefined
-                }
-                <form>
-
-                    <input type="text" value={review} onChange={(event) => setReview(event.target.value)}></input>
-                    <button onClick={(event) => reviewSubmit(event)}>Submit</button>
-                </form>
-            </div>
-
-        </div>
+        </>
     );
 }
 
