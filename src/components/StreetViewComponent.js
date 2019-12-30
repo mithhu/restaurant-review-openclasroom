@@ -4,9 +4,19 @@ import { withRouter, Redirect } from "react-router-dom";
 
 
 const StreetViewComponentView = (props) => {
-    console.log(props)
     // see https://developers.google.com/maps/documentation/javascript
     const googleMapsApiKey = "AIzaSyDGIUkILRvAVhTd5XI4j4M471uNZJmxVLs";
+    const [review, setReview] = useState("");
+    let [reviewList, setReviewList] = useState(props.location.state.reviews);
+
+    const reviewSubmit = (event) => {
+        event.preventDefault();
+        reviewList = [...reviewList, {
+            "comment": review
+        }]
+        setReviewList(reviewList);
+        setReview("")
+    }
 
     // see https://developers.google.com/maps/documentation/javascript/3.exp/reference#StreetViewPanoramaOptions
     let streetViewPanoramaOptions;
@@ -35,11 +45,20 @@ const StreetViewComponentView = (props) => {
             </div>
             <div style={{ width: "50vw", textAlign: "center" }}>
                 <h1>Review</h1>
-                {props.location.state.reviews ?
-                    props.location.state.reviews.map(review => (
-                        <p>"{review.comment}"</p>
-                    )) : undefined
+                {reviewList ?
+                    reviewList.map(review => (
+                        <>
+                            <p>"{review.comment}"</p>
+                        </>
+                    )
+
+                    ) : undefined
                 }
+                <form>
+
+                    <input type="text" value={review} onChange={(event) => setReview(event.target.value)}></input>
+                    <button onClick={(event) => reviewSubmit(event)}>Submit</button>
+                </form>
             </div>
 
         </div>
