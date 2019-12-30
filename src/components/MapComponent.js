@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, Redirect, NavLink } from "react-router-dom";
+import * as restaurantInfo from '../components/restaurant.json';
+
 import {
   withGoogleMap,
   withScriptjs,
@@ -10,7 +12,44 @@ import {
 import Modal from 'react-modal';
 import { RestaurantList } from "./RestaurantList.js";
 
-function Map(props) {
+const Map = (props) => {
+  const [startStar, setStartStar] = useState(1);
+  const [endStar, setEndStar] = useState(5);
+  const averageStar = (ratings) => {
+    let totalStar = 0;
+    let avgStar;
+    ratings.map((rating) => {
+      totalStar = totalStar + rating.stars
+    })
+    avgStar = totalStar / ratings.length
+    return avgStar;
+  }
+
+  const restFilter = () => {
+    let val = restaurantList.filter(restaurant => averageStar(restaurant.ratings) >= startStar && averageStar(restaurant.ratings) <= endStar)
+    return val;
+  }
+
+  const handleStar = async (event, setStar) => {
+    // if (!event.target.value) {
+    //     setStar(1)
+    // }
+    // else if (event.target.value < 1) {
+    //     setStar(1)
+    // } else if (event.target.value > 5) {
+    //     setStar(5)
+    // } else {
+    setStar(event.target.value)
+    console.log(restaurantList)
+    // }
+    let newVal = await restFilter()
+    setRestaurantView(newVal);
+    console.log(newVal)
+  }
+
+  let filteredData = restaurantInfo.data;
+  // .filter(restaurant => averageStar(restaurant.ratings) >= startStar && averageStar(restaurant.ratings) <= endStar)
+
   const getLocation = () => {
     navigator.geolocation.getCurrentPosition(async position => {
       let lat = await position.coords.latitude;
@@ -33,8 +72,10 @@ function Map(props) {
   const [lng, setLng] = useState("");
 
   const [restaurantName, setRestaurantName] = useState("");
-  let [restaurantList, setRestaurantList] = useState(props.filteredData);
-  const addRestaurant = (e) => {
+  let [restaurantList, setRestaurantList] = useState(filteredData);
+  let [restaurantView, setRestaurantView] = useState(filteredData);
+
+  const addRestaurant = async (e) => {
     e.preventDefault();
     restaurantList = [...restaurantList, {
       lat: lat, long: lng, restaurantName: restaurantName, "ratings": [
@@ -44,6 +85,8 @@ function Map(props) {
         }]
     }]
     setRestaurantList(restaurantList);
+    let newVal = await restFilter()
+    setRestaurantView(newVal);
     setForm(false)
   }
 
@@ -78,6 +121,11 @@ function Map(props) {
 
   return (
     <div>
+      <div>
+        <input type="Number" value={startStar} onChange={(event) => handleStar(event, setStartStar)} />
+        <input type="Number" value={endStar} onChange={(event) => handleStar(event, setEndStar)} />
+
+      </div>
       <GoogleMap
         defaultZoom={15}
         center={location === null ? { lat: 10, lng: 20 } : location}
@@ -88,7 +136,7 @@ function Map(props) {
         />
 
         {
-          restaurantList.map(restaurant => (
+          restaurantView.map(restaurant => (
             <Marker
               position={{
                 lat: restaurant.lat,
@@ -163,9 +211,11 @@ function Map(props) {
           </form>
         </Modal>
       </GoogleMap >
-      <RestaurantList filteredData={restaurantList} />
+      <RestaurantList filteredData={restaurantView} />
     </div>
   );
 }
 
 export const MapComponent = withScriptjs(withGoogleMap(Map));
+
+//TODO: 1. inline star change 2. have a submit button for star
