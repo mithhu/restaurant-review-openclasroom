@@ -29,17 +29,22 @@ function Map(props) {
   const [selectedPark, setSelectedPark] = useState(null);
   const [form, setForm] = useState(false);
 
+  const [lat, setLat] = useState("");
+  const [lng, setLng] = useState("");
+
+  const [restaurantName, setRestaurantName] = useState("");
   let [restaurantList, setRestaurantList] = useState(props.filteredData);
-  const addRestaurant = (lat, lng) => {
+  const addRestaurant = (e) => {
+    e.preventDefault();
     restaurantList = [...restaurantList, {
-      lat: lat, long: lng, "ratings": [
+      lat: lat, long: lng, restaurantName: restaurantName, "ratings": [
         {
-          "stars": 4,
+          "stars": star,
           "comment": "Great Place!"
         }]
     }]
     setRestaurantList(restaurantList);
-    setForm(true)
+    setForm(false)
   }
 
   const customStyles = {
@@ -53,6 +58,12 @@ function Map(props) {
     }
   };
   const [star, setStar] = useState(1);
+  const restaurantForm = (lat, lng) => {
+    // e.preventDefault();
+    setForm(true);
+    setLat(lat);
+    setLng(lng);
+  }
 
   // const handleStar = (event, setStar) => {
   //   if (event.target.value < 0) {
@@ -70,7 +81,7 @@ function Map(props) {
       <GoogleMap
         defaultZoom={15}
         center={location === null ? { lat: 10, lng: 20 } : location}
-        onClick={(event) => addRestaurant(event.latLng.lat(), event.latLng.lng())}
+        onClick={(event) => restaurantForm(event.latLng.lat(), event.latLng.lng())}
       >
         <Marker
           position={location}
@@ -129,7 +140,11 @@ function Map(props) {
           <form>
             <div>
 
-              <span style={{ paddingRight: "10px" }}>Restaurant name: </span><input type="text" />
+              <span style={{ paddingRight: "10px" }}>Restaurant name: </span><input
+                type="text"
+                onChange={(event) => setRestaurantName(event.target.value)}
+                value={restaurantName}
+              />
             </div>
             <div>
               <span style={{ paddingRight: "10px" }}>Restaurant ratings: </span>
@@ -142,7 +157,7 @@ function Map(props) {
             </div>
             <div>
 
-              <button>Add</button>
+              <button onClick={(event) => addRestaurant(event)}>Add</button>
             </div>
 
           </form>
