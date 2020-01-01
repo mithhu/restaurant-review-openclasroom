@@ -30,19 +30,9 @@ const Map = (props) => {
     return val;
   }
 
-  const handleStar = async (event, setStar) => {
-    // if (!event.target.value) {
-    //     setStar(1)
-    // }
-    // else if (event.target.value < 1) {
-    //     setStar(1)
-    // } else if (event.target.value > 5) {
-    //     setStar(5)
-    // } else {
-    setStar(event.target.value)
-    console.log(restaurantList)
-    // }
-    let newVal = await restFilter()
+  const handleStar = (event) => {
+    event.preventDefault();
+    let newVal = restFilter()
     setRestaurantView(newVal);
     console.log(newVal)
   }
@@ -88,6 +78,8 @@ const Map = (props) => {
     let newVal = await restFilter()
     setRestaurantView(newVal);
     setForm(false)
+    setRestaurantName("");
+    setStar("");
   }
 
   const customStyles = {
@@ -121,11 +113,13 @@ const Map = (props) => {
 
   return (
     <div>
-      <div>
-        <input type="Number" value={startStar} onChange={(event) => handleStar(event, setStartStar)} />
-        <input type="Number" value={endStar} onChange={(event) => handleStar(event, setEndStar)} />
-
-      </div>
+      <form>
+        <input type="Number" value={startStar} onChange={(event) => setStartStar(event.target.value)} />
+        <input type="Number" value={endStar} onChange={(event) => setEndStar(event.target.value)} />
+        <div>
+          <button onClick={(event) => handleStar(event)}>Add</button>
+        </div>
+      </form>
       <GoogleMap
         defaultZoom={15}
         center={location === null ? { lat: 10, lng: 20 } : location}
@@ -187,7 +181,6 @@ const Map = (props) => {
           <h2>Add a restaurant</h2>
           <form>
             <div>
-
               <span style={{ paddingRight: "10px" }}>Restaurant name: </span><input
                 type="text"
                 onChange={(event) => setRestaurantName(event.target.value)}
