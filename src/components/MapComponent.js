@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+/* eslint-disable no-undef */
+import React, { useState, useEffect, useRef } from "react";
 import { Link, Redirect, NavLink } from "react-router-dom";
 import * as restaurantInfo from '../components/restaurant.json';
 
@@ -24,6 +25,8 @@ const Map = (props) => {
     avgStar = totalStar / ratings.length
     return avgStar;
   }
+
+  const refs = useRef()
 
   const restFilter = () => {
     let val = restaurantList.filter(restaurant => averageStar(restaurant.ratings) >= startStar && averageStar(restaurant.ratings) <= endStar)
@@ -52,6 +55,8 @@ const Map = (props) => {
 
   useEffect(() => {
     getLocation();
+    console.log('new', refs)
+
   }, [])
 
   const [location, setLocation] = useState(null);
@@ -111,6 +116,87 @@ const Map = (props) => {
   //   }
   // }
 
+  const fetchPlaces = () => {
+    // let map = new window.google.maps.Map(refs.current, {
+    //   center: location,
+    //   zoom: 14,
+    //   mapTypeId: "roadmap"
+    // });
+    // console.log(map);
+    // console.log(this.refs)
+
+    // let service = new window.google.maps.places.PlacesService(map);
+    // service.getDetails(
+    //   { placeId: "ChIJwRGj6NnAVTcRfnB5LY-hhco" },
+    //   (place, status) => {
+    //     // const latLng = String(place.geometry.location)
+    //     //   .replace(" ", "")
+    //     //   .replace("(", "")
+    //     //   .replace(")", "")
+    //     //   .split(",");
+    //     console.log(place);
+    //     // this.setState({
+    //     //   location: latLng,
+    //     //   place,
+    //     //   reviews: place.reviews
+    //     // });
+    //   }
+    // );
+    // console.log(refs)
+    let places;
+    const bounds = refs.current.getBounds();
+    const service = new google.maps.places.PlacesService(refs.current.context.__SECRET_MAP_DO_NOT_USE_OR_YOU_WILL_BE_FIRED);
+    const request = {
+      bounds: bounds,
+      type: ['restaurant']
+    };
+    service.nearbySearch(request, (results, status) => {
+      if (status == google.maps.places.PlacesServiceStatus.OK) {
+        console.log(results);
+        // updatePlaces(results);
+      }
+    })
+
+    // var request = {
+    //   location: Location,
+    //   radius: '500',
+    //   query: 'restaurant'
+    // };
+
+    // let map = new window.google.maps.Map(refs.map, {
+    //   center: location,
+    //   zoom: 14,
+    //   mapTypeId: "roadmap"
+    // });
+    // console.log('new', refs)
+
+    // let service = new google.maps.places.PlacesService(location);
+    // let service = map.getBounds();
+    // console.log(service)
+    // service.textSearch(request, callback);
+    // let places;
+    // const bounds = refs.map.getBounds();
+    // const service = new google.maps.places.PlacesService(refs.map.context.__SECRET_MAP_DO_NOT_USE_OR_YOU_WILL_BE_FIRED);
+    // const request = {
+    //     bounds: bounds,
+    //     type: ['hotel']
+    // };
+    // service.nearbySearch(request, (results, status) => {
+    //     if (status == google.maps.places.PlacesServiceStatus.OK) {
+    //         console.log(results);
+    //         updatePlaces(results);
+    //     }
+    // })
+  }
+
+  // function callback(results, status) {
+  //   if (status == google.maps.places.PlacesServiceStatus.OK) {
+  //     for (var i = 0; i < results.length; i++) {
+  //       var place = results[i];
+  //       createMarker(results[i]);
+  //     }
+  //   }
+  // }
   return (
     <div>
       <form>
@@ -124,6 +210,10 @@ const Map = (props) => {
         defaultZoom={15}
         center={location === null ? { lat: 10, lng: 20 } : location}
         onClick={(event) => restaurantForm(event.latLng.lat(), event.latLng.lng())}
+        onTilesLoaded={fetchPlaces}
+        ref={refs}
+      // ref={props.onMapLoad}
+      // onMapLoad={}
       >
         <Marker
           position={location}

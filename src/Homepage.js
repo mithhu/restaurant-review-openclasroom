@@ -32,7 +32,6 @@ export const Homepage = () => {
     // }
 
     // let filteredData = restaurantInfo.data.filter(restaurant => averageStar(restaurant.ratings) >= startStar && averageStar(restaurant.ratings) <= endStar)
-
     return (
         <>
             {/* <div>
