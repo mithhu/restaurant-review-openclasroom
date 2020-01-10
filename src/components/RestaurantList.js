@@ -27,6 +27,28 @@ export const RestaurantList = (props) => {
                 </div>
             ))
             }
+
+            {props.googleData.map(restaurant => (
+                <div>
+                    <NavLink
+                        style={{ marginRight: "20px" }}
+                        to={{
+                            pathname: `place/?lat=${restaurant.geometry.location.lat()}&long=${restaurant.geometry.location.lng()}`,
+                            state: {
+                                lat: restaurant.geometry.location.lat(),
+                                lng: restaurant.geometry.location.lng(),
+                                // reviews: restaurant.ratings
+                                placeId: restaurant.place_id
+                            }
+                        }}>
+                        {restaurant.name}
+                    </NavLink>
+                    <span>
+                        {restaurant.rating}
+                    </span>
+                </div>
+            ))
+            }
         </div>
     )
 }
