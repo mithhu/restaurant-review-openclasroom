@@ -134,7 +134,6 @@ const Map = () => {
 
   //Fetch nearest places using Google PlacesService api
   const fetchPlaces = () => {
-    console.log(refs.current)
     const bounds = refs.current.getBounds(); //gets the visible area of the google map
     const service = new google.maps.places.PlacesService(refs.current.context.__SECRET_MAP_DO_NOT_USE_OR_YOU_WILL_BE_FIRED);
     const request = {
