@@ -134,11 +134,14 @@ const Map = () => {
 
   //Fetch nearest places using Google PlacesService api
   const fetchPlaces = () => {
+    console.log(refs.current)
     const bounds = refs.current.getBounds(); //gets the visible area of the google map
     const service = new google.maps.places.PlacesService(refs.current.context.__SECRET_MAP_DO_NOT_USE_OR_YOU_WILL_BE_FIRED);
     const request = {
       bounds: bounds,
-      type: ['restaurant']
+      type: ['restaurant'],
+      location: refs.current.props.center,
+      radius: 10000
     };
     service.nearbySearch(request, (results, status) => {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
@@ -194,6 +197,7 @@ const Map = () => {
         {
           restaurantView.map(restaurant => (
             <Marker
+              key={restaurant.lat}
               position={{
                 lat: restaurant.lat,
                 lng: restaurant.long
@@ -209,6 +213,7 @@ const Map = () => {
         {googleRestaurantView &&
           googleRestaurantView.map(restaurant => (
             <Marker
+              key={restaurant.place_id}
               position={{
                 lat: restaurant.geometry.location.lat(),
                 lng: restaurant.geometry.location.lng()

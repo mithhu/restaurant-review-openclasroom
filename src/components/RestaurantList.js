@@ -9,7 +9,7 @@ export const RestaurantList = (props) => {
             <h2 style={{ color: "#ffffff" }}>Restaurant List</h2>
             {/* shows local restaurant list */}
             {props.filteredData.map(restaurant => (
-                <div>
+                <div key={restaurant.lat}>
                     <NavLink
                         style={{ marginRight: "20px", color: "#ffffff", textDecoration: "none" }}
                         to={{
@@ -30,8 +30,9 @@ export const RestaurantList = (props) => {
             }
             {/* shows google restaurant list */}
             {props.googleFilteredData.map(restaurant => (
-                <div>
+                <div key={restaurant.place_id}>
                     <NavLink
+
                         style={{ marginRight: "20px", color: "#ffffff", textDecoration: "none" }}
                         to={{
                             pathname: `place/?lat=${restaurant.geometry.location.lat()}&long=${restaurant.geometry.location.lng()}`,

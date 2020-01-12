@@ -82,7 +82,7 @@ const StreetViewComponentView = (props) => {
                         <p style={{ color: "#ffffff" }}>{review.comment ? review.comment : undefined}</p>
                     )) : undefined
                     }
-                    {reviewList ? googleReviewList.map(review => (
+                    {googleReviewList ? googleReviewList.map(review => (
                         <p style={{ color: "#ffffff" }}>{review.text ? review.text : undefined}</p>
                     )) : undefined
                     }
