@@ -1,4 +1,4 @@
-export const api_key = process.env.REACT_APP_API_KEY; //getting my google map api key from .env file
+export const api_key = "AIzaSyDGIUkILRvAVhTd5XI4j4M471uNZJmxVLs"
 
 export const averageStar = (ratings) => {
     let totalStar = 0;
