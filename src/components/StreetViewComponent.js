@@ -78,13 +78,13 @@ const StreetViewComponentView = (props) => {
                 {/* shows the review list */}
                 <div style={{ width: "50vw", textAlign: "center", marginTop: "20px", background: "#0C041C" }}>
                     <h1 style={{ color: "#ffffff" }}>Review</h1>
-                    {reviewList.map(review => (
+                    {reviewList ? reviewList.map(review => (
                         <p style={{ color: "#ffffff" }}>{review.comment ? review.comment : undefined}</p>
-                    ))
+                    )) : undefined
                     }
-                    {googleReviewList.map(review => (
+                    {reviewList ? googleReviewList.map(review => (
                         <p style={{ color: "#ffffff" }}>{review.text ? review.text : undefined}</p>
-                    ))
+                    )) : undefined
                     }
                     {/* form for review add */}
                     <form>
