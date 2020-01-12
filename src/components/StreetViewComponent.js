@@ -3,24 +3,26 @@ import React, { useEffect, useState, useRef } from 'react';
 import ReactStreetview from 'react-streetview';
 import { withRouter, Redirect, NavLink } from "react-router-dom";
 import axios from 'axios';
-
+import { api_key } from '../utils';
 
 const StreetViewComponentView = (props) => {
-    // see https://developers.google.com/maps/documentation/javascript
     const googleMapsApiKey = "AIzaSyDGIUkILRvAVhTd5XI4j4M471uNZJmxVLs";
     const [review, setReview] = useState("");
     let [reviewList, setReviewList] = useState(props.location.state.reviews);
     let [googleReviewList, setGoogleReviewList] = useState([]);
     const refs = useRef();
 
+    //to submit a restaurant review 
     const reviewSubmit = (event) => {
         event.preventDefault();
+        //adds local restaurant review
         if (props.location.state.reviews) {
             reviewList = [...reviewList, {
                 "comment": review
             }]
             setReviewList(reviewList);
         } else {
+            //adds Google restaurant review
             googleReviewList = [...googleReviewList, {
                 "text": review
             }]
@@ -29,7 +31,7 @@ const StreetViewComponentView = (props) => {
         setReview("")
     }
 
-    // see https://developers.google.com/maps/documentation/javascript/3.exp/reference#StreetViewPanoramaOptions
+    //settings for strretview map
     let streetViewPanoramaOptions;
     if (props.location.state) {
         streetViewPanoramaOptions = {
@@ -41,18 +43,14 @@ const StreetViewComponentView = (props) => {
         };
     }
     const fetchReview = () => {
-        // e.preventDefault();
-        // let placeId = props.location.state.placeId ? props.location.state.placeId : placeId 
-        console.log(props.location.state);
-        console.log(props.location.state.placeId)
-        axios.get(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/details/json?placeid=${props.location.state.placeId}&key=AIzaSyDGIUkILRvAVhTd5XI4j4M471uNZJmxVLs`)
-            // .then(response => console.log('respo', response.data.result.reviews))
+        axios.get(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/details/json?placeid=${props.location.state.placeId}&key=${api_key}`)
             .then(response => setGoogleReviewList(response.data.result.reviews))
             .catch(err => {
                 console.log(err)                     //Axios entire error message
                 console.log(err.response.data.error) //Google API error message 
             })
     }
+    //fetch reviews when the pagge loads or compnent renders
     useEffect(() => {
         if (props.location.state.placeId) {
             fetchReview()
@@ -60,11 +58,12 @@ const StreetViewComponentView = (props) => {
     }, [])
     return (
         <>
-            <NavLink to="/">Home</NavLink>
+            <NavLink style={{ textDecoration: "none" }} to="/">Back to Home</NavLink>
             <div style={{ display: "flex" }}>
                 <div style={{
                     width: '50vw',
-                    height: '100vh',
+                    height: '94vh',
+                    marginTop: "20px",
                     backgroundColor: '#eeeeee'
                 }}>
                     {props.location.state ?
@@ -72,31 +71,30 @@ const StreetViewComponentView = (props) => {
                             apiKey={googleMapsApiKey}
                             streetViewPanoramaOptions={streetViewPanoramaOptions}
                             ref={refs}
-
                         />) : (<Redirect to="/" />)
                     }
                 </div>
-                <div style={{ width: "50vw", textAlign: "center" }}>
-                    <h1>Review</h1>
-                    {reviewList ?
+                {/* shows the review list */}
+                <div style={{ width: "50vw", textAlign: "center", marginTop: "20px", background: "#0C041C" }}>
+                    <h1 style={{ color: "#ffffff" }}>Review</h1>
+                    {
                         reviewList.map(review => (
-                            <p>"{review.comment}"</p>
-                        )
-
-                        ) : undefined
+                            <p style={{ color: "#ffffff" }}>{review.comment ? review.comment : "No review has been addded"}</p>
+                        ))
                     }
-
                     {googleReviewList.map(review => (
-                        <p>"{review.text}"</p>
+                        <p style={{ color: "#ffffff" }}>{review.text ? review.text : "No review has been addded"}</p>
                     ))
                     }
+                    {/* form for review add */}
                     <form>
-
-                        <input type="text" value={review} onChange={(event) => setReview(event.target.value)}></input>
-                        <button onClick={(event) => reviewSubmit(event)}>Submit</button>
+                        <p style={{ color: "#ffffff", marginTop: "30px" }}>Add a review</p>
+                        <textarea type="text" style={{ width: "300px" }} value={review} onChange={(event) => setReview(event.target.value)}></textarea>
+                        <div>
+                            <button style={{ background: '#B2D9FB', cursor: "pointer" }} onClick={(event) => reviewSubmit(event)}>Submit</button>
+                        </div>
                     </form>
                 </div>
-
             </div>
         </>
     );

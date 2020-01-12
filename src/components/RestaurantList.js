@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
-import * as restaurantInfo from './restaurant.json';
-import { Link, Redirect, NavLink } from "react-router-dom";
-import { averageStar } from '../Homepage'
+import React from 'react';
+import { NavLink } from "react-router-dom";
+import { averageStar } from '../utils.js';
+
 
 export const RestaurantList = (props) => {
     return (
         <div style={{ width: "50vw", textAlign: "center" }}>
-            <h2>Restaurant List</h2>
+            <h2 style={{ color: "#ffffff" }}>Restaurant List</h2>
+            {/* shows local restaurant list */}
             {props.filteredData.map(restaurant => (
                 <div>
                     <NavLink
-                        style={{ marginRight: "20px" }}
+                        style={{ marginRight: "20px", color: "#ffffff", textDecoration: "none" }}
                         to={{
                             pathname: `place/?lat=${restaurant.lat}&long=${restaurant.long}`,
                             state: {
@@ -21,38 +22,36 @@ export const RestaurantList = (props) => {
                         }}>
                         {restaurant.restaurantName ? restaurant.restaurantName : "Unknown"}:
                     </NavLink>
-                    <span>
+                    <span style={{ color: "#ffffff" }}>
                         {averageStar(restaurant.ratings)}
                     </span>
                 </div>
             ))
             }
-
-            {props.googleData.map(restaurant => (
+            {/* shows google restaurant list */}
+            {props.googleFilteredData.map(restaurant => (
                 <div>
                     <NavLink
-                        style={{ marginRight: "20px" }}
+                        style={{ marginRight: "20px", color: "#ffffff", textDecoration: "none" }}
                         to={{
                             pathname: `place/?lat=${restaurant.geometry.location.lat()}&long=${restaurant.geometry.location.lng()}`,
                             state: {
                                 lat: restaurant.geometry.location.lat(),
                                 lng: restaurant.geometry.location.lng(),
-                                // reviews: restaurant.ratings
                                 placeId: restaurant.place_id
                             }
                         }}>
                         {restaurant.name}
                     </NavLink>
-                    <span>
+                    <span style={{ color: "#ffffff" }}>
                         {restaurant.rating}
                     </span>
                 </div>
             ))
             }
-        </div>
+        </div >
     )
 }
-// let c = a.data.map(res => res.ratings.filter(star => star.stars < 5))
-// let d = a.data.filter(d=> averageStar(d.ratings) < 4.1)
+
 
 
