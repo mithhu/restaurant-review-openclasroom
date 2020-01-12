@@ -21,6 +21,7 @@ const StreetViewComponentView = (props) => {
                 "comment": review
             }]
             setReviewList(reviewList);
+            console.log(reviewList)
         } else {
             //adds Google restaurant review
             googleReviewList = [...googleReviewList, {
@@ -77,13 +78,12 @@ const StreetViewComponentView = (props) => {
                 {/* shows the review list */}
                 <div style={{ width: "50vw", textAlign: "center", marginTop: "20px", background: "#0C041C" }}>
                     <h1 style={{ color: "#ffffff" }}>Review</h1>
-                    {
-                        reviewList.map(review => (
-                            <p style={{ color: "#ffffff" }}>{review.comment ? review.comment : "No review has been addded"}</p>
-                        ))
+                    {reviewList.map(review => (
+                        <p style={{ color: "#ffffff" }}>{review.comment ? review.comment : undefined}</p>
+                    ))
                     }
                     {googleReviewList.map(review => (
-                        <p style={{ color: "#ffffff" }}>{review.text ? review.text : "No review has been addded"}</p>
+                        <p style={{ color: "#ffffff" }}>{review.text ? review.text : undefined}</p>
                     ))
                     }
                     {/* form for review add */}
