@@ -276,7 +276,7 @@ const Map = () => {
           </div>
           <p style={{ color: "red" }}>{errorAddRestaurant ? errorAddRestaurant : undefined}</p>
           <form>
-            <div>
+            <div style={{ paddingBottom: "5px" }}>
               <span>Restaurant name: </span>
               <input
                 style={{ border: '1px solid #ffab23' }}
@@ -285,7 +285,7 @@ const Map = () => {
                 value={restaurantName}
               />
             </div>
-            <div>
+            <div style={{ paddingBottom: "5px" }}>
               <span>Restaurant ratings: </span>
               <input
                 style={{ border: '1px solid #ffab23', textAlign: "center" }}
@@ -295,7 +295,7 @@ const Map = () => {
                 onChange={(event) => setStar(event.target.value)}
               />
             </div>
-            <div>
+            <div style={{ paddingBottom: "5px" }}>
               <span>Your review: </span>
               <input
                 style={{ border: '1px solid #ffab23' }}
@@ -304,8 +304,8 @@ const Map = () => {
                 value={restaurantReview}
               />
             </div>
-            <div>
-              <span>Address : </span>
+            <div style={{ paddingBottom: "5px" }}>
+              <span>Address: </span>
               <input
                 style={{ border: '1px solid #ffab23' }}
                 type="text"
