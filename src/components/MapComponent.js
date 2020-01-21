@@ -267,17 +267,17 @@ const Map = () => {
             <h2>Add a restaurant</h2>
             <button
               className="myButton"
-              style={{ height: "40px" }}
+              style={{ height: "30px" }}
               onClick={() => {
                 setModalOpen(false)
                 setErrorAddRestaurant("")
               }
-              }> close</button>
+              }> X </button>
           </div>
           <p style={{ color: "red" }}>{errorAddRestaurant ? errorAddRestaurant : undefined}</p>
           <form>
             <div>
-              <span style={{ paddingRight: "10px" }}>Restaurant name: </span>
+              <span>Restaurant name: </span>
               <input
                 style={{ border: '1px solid #ffab23' }}
                 type="text"
@@ -286,9 +286,9 @@ const Map = () => {
               />
             </div>
             <div>
-              <span style={{ paddingRight: "10px" }}>Restaurant ratings: </span>
+              <span>Restaurant ratings: </span>
               <input
-                style={{ border: '1px solid #ffab23' }}
+                style={{ border: '1px solid #ffab23', textAlign: "center" }}
                 type="Number"
                 min="1" max="5"
                 value={star}
@@ -296,7 +296,7 @@ const Map = () => {
               />
             </div>
             <div>
-              <span style={{ paddingRight: "10px" }}>Your review: </span>
+              <span>Your review: </span>
               <input
                 style={{ border: '1px solid #ffab23' }}
                 type="text"
@@ -305,7 +305,7 @@ const Map = () => {
               />
             </div>
             <div>
-              <span style={{ paddingRight: "10px" }}>Address : </span>
+              <span>Address : </span>
               <input
                 style={{ border: '1px solid #ffab23' }}
                 type="text"
