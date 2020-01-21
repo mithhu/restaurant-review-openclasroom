@@ -58,13 +58,11 @@ const StreetViewComponentView = (props) => {
         }
     }, [])
     return (
-        <>
-            <NavLink style={{ textDecoration: "none" }} to="/">Back to Home</NavLink>
-            <div style={{ display: "flex" }}>
-                <div style={{
-                    width: '50vw',
+        <div className="routeLink" style={{ background: "#EFEAE5" }} >
+            <NavLink className="route" style={{ textDecoration: "none", color: "#ffab23" }} to="/">Back to Home</NavLink>
+            <div className="streetView">
+                <div className="streetViewStyle" style={{
                     height: '94vh',
-                    marginTop: "20px",
                     backgroundColor: '#eeeeee'
                 }}>
                     {props.location.state ?
@@ -76,27 +74,35 @@ const StreetViewComponentView = (props) => {
                     }
                 </div>
                 {/* shows the review list */}
-                <div style={{ width: "50vw", textAlign: "center", marginTop: "20px", background: "#0C041C" }}>
-                    <h1 style={{ color: "#ffffff" }}>Review</h1>
+                <div className="reviewList" style={{ textAlign: "center", marginTop: "20px", paddingBottom: "20px", background: "#EFEAE5" }}>
+                    <h1 style={{ color: "#5B5542" }}>Review</h1>
                     {reviewList ? reviewList.map(review => (
-                        <p style={{ color: "#ffffff" }}>{review.comment ? review.comment : undefined}</p>
+                        <div style={{
+                            background: "#ffffff", padding: "0 10px", margin: "0 auto", maxWidth: "fit-content"
+                        }}>
+                            <p style={{ color: "#5B5542", margin: "5px 0" }}>{review.comment ? review.comment : undefined}</p>
+                        </div>
                     )) : undefined
                     }
                     {googleReviewList ? googleReviewList.map(review => (
-                        <p style={{ color: "#ffffff" }}>{review.text ? review.text : undefined}</p>
+                        <div style={{
+                            background: "#ffffff", padding: "0 10px", margin: "0 auto", maxWidth: "fit-content"
+                        }}>
+                            <p style={{ color: "#5B5542", margin: "5px 0" }}>{review.text ? review.text : undefined}</p>
+                        </div>
                     )) : undefined
                     }
                     {/* form for review add */}
                     <form>
-                        <p style={{ color: "#ffffff", marginTop: "30px" }}>Add a review</p>
+                        <h3 style={{ color: "#5B5542", marginTop: "30px" }}>Add a review</h3>
                         <textarea type="text" style={{ width: "300px" }} value={review} onChange={(event) => setReview(event.target.value)}></textarea>
                         <div>
-                            <button style={{ background: '#B2D9FB', cursor: "pointer" }} onClick={(event) => reviewSubmit(event)}>Submit</button>
+                            <button className="myButton" onClick={(event) => reviewSubmit(event)}>Submit</button>
                         </div>
                     </form>
                 </div>
-            </div>
-        </>
+            </div >
+        </div >
     );
 }
 

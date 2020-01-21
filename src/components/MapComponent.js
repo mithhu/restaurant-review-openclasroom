@@ -153,34 +153,36 @@ const Map = () => {
 
 
   return (
-    <div>
+    <div style={{ background: "#EFEAE5" }}>
       <div
+        className="filterRestaurant"
         style={{
-          textAlign: "center",
-          paddingTop: errorRating ? "0px" : "20px"
+          textAlign: "center", background: "#EFEAE5"
         }}
       >
         <p style={{ color: "red" }}>{errorRating ? errorRating : undefined}</p>
         <form>
           <div>
-            <span style={{ color: "#ffffff" }}> Restaurant start rating: </span>
+            <span style={{ color: "#5B5542" }}> Restaurant start rating: </span>
             <input
               type="Number"
               value={startRating}
               onChange={(event) => setStartRating(event.target.value)}
               min="1" max="4"
+              style={{ textAlign: "center" }}
             />
           </div>
           <div>
-            <span style={{ color: "#ffffff" }}> Restaurant end rating: </span>
+            <span style={{ color: "#5B5542" }}> Restaurant end rating: </span>
             <input
               type="Number"
               value={endRating}
               onChange={(event) => setEndRating(event.target.value)}
               min="2" max="5"
+              style={{ textAlign: "center" }}
             />
           </div>
-          <button style={{ marginTop: "20px", background: '#B2D9FB', cursor: "pointer" }} onClick={(event) => handleRatings(event)}>Show Restaurants</button>
+          <button className="buttonSubmit myButton" onClick={(event) => handleRatings(event)}>Show Restaurants</button>
         </form>
       </div>
       <GoogleMap
@@ -263,7 +265,9 @@ const Map = () => {
         >
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <h2>Add a restaurant</h2>
-            <button style={{ height: "20px", background: '#B2D9FB', cursor: "pointer" }}
+            <button
+              className="myButton"
+              style={{ height: "40px" }}
               onClick={() => {
                 setModalOpen(false)
                 setErrorAddRestaurant("")
@@ -275,7 +279,7 @@ const Map = () => {
             <div>
               <span style={{ paddingRight: "10px" }}>Restaurant name: </span>
               <input
-                style={{ border: '2px solid #B2D9FB' }}
+                style={{ border: '1px solid #ffab23' }}
                 type="text"
                 onChange={(event) => setRestaurantName(event.target.value)}
                 value={restaurantName}
@@ -284,7 +288,7 @@ const Map = () => {
             <div>
               <span style={{ paddingRight: "10px" }}>Restaurant ratings: </span>
               <input
-                style={{ border: '2px solid #B2D9FB' }}
+                style={{ border: '1px solid #ffab23' }}
                 type="Number"
                 min="1" max="5"
                 value={star}
@@ -294,7 +298,7 @@ const Map = () => {
             <div>
               <span style={{ paddingRight: "10px" }}>Your review: </span>
               <input
-                style={{ border: '2px solid #B2D9FB' }}
+                style={{ border: '1px solid #ffab23' }}
                 type="text"
                 onChange={(event) => setRestaurantReview(event.target.value)}
                 value={restaurantReview}
@@ -303,14 +307,14 @@ const Map = () => {
             <div>
               <span style={{ paddingRight: "10px" }}>Address : </span>
               <input
-                style={{ border: '2px solid #B2D9FB' }}
+                style={{ border: '1px solid #ffab23' }}
                 type="text"
                 onChange={(event) => setRestaurantAddress(event.target.value)}
                 value={restaurantAddress}
               />
             </div>
             <div style={{ textAlign: "center", marginTop: "20px" }}>
-              <button style={{ background: '#B2D9FB', cursor: "pointer" }} onClick={(event) => addRestaurant(event)}>Add Restaurant</button>
+              <button className="myButton" onClick={(event) => addRestaurant(event)}>Add Restaurant</button>
             </div>
           </form>
         </Modal>
