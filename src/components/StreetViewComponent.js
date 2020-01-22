@@ -62,7 +62,6 @@ const StreetViewComponentView = (props) => {
             <NavLink className="route" style={{ textDecoration: "none", color: "#ffab23" }} to="/">Back to Home</NavLink>
             <div className="streetView">
                 <div className="streetViewStyle" style={{
-                    height: '94vh',
                     backgroundColor: '#eeeeee'
                 }}>
                     {props.location.state ?

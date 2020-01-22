@@ -69,6 +69,7 @@ code {
   }
   .streetViewStyle {
     width: 100vw;
+    height: 85vh;
   }
   .reviewList {
     width: 100vw
@@ -105,6 +106,7 @@ code {
   }
   .streetViewStyle{
     width: 50vw;
+    height: 94vh;
   }
   .reviewList {
     width: 50vw
