@@ -73,11 +73,13 @@ const StreetViewComponentView = (props) => {
                     }
                 </div>
                 {/* shows the review list */}
-                <div className="reviewList" style={{ textAlign: "center", marginTop: "20px", paddingBottom: "20px", background: "#EFEAE5" }}>
+                <div className="reviewList" style={{ textAlign: "center", marginTop: "20px", 
+                paddingBottom: "20px", paddingLeft: "10px", paddingRight: "10px",
+                 background: "#EFEAE5" }}>
                     <h1 style={{ color: "#5B5542" }}>Review</h1>
                     {reviewList ? reviewList.map(review => (
                         <div style={{
-                            background: "#ffffff", padding: "0 10px", margin: "0 auto", maxWidth: "fit-content"
+                            background: "#ffffff", padding: "5 10px", margin: "5px auto", maxWidth: "fit-content"
                         }}>
                             <p style={{ color: "black", margin: "5px 0" }}>{review.comment ? review.comment : undefined}</p>
                         </div>
@@ -85,7 +87,7 @@ const StreetViewComponentView = (props) => {
                     }
                     {googleReviewList ? googleReviewList.map(review => (
                         <div style={{
-                            background: "#ffffff", padding: "0 10px", margin: "0 auto", maxWidth: "fit-content"
+                            background: "#ffffff", padding: "5px 10px", margin: "5px auto", maxWidth: "fit-content"
                         }}>
                             <p style={{ color: "black", margin: "5px 0" }}>{review.text ? review.text : undefined}</p>
                         </div>
