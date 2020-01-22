@@ -59,7 +59,7 @@ const StreetViewComponentView = (props) => {
     }, [])
     return (
         <div className="routeLink" style={{ background: "#EFEAE5" }} >
-            <NavLink className="route" style={{ textDecoration: "none", color: "#ffab23" }} to="/">Back to Home</NavLink>
+            <NavLink className="route" style={{ textDecoration: "none", color: "#5B5542" }} to="/">Back to Home</NavLink>
             <div className="streetView">
                 <div className="streetViewStyle" style={{
                     backgroundColor: '#eeeeee'
@@ -79,7 +79,7 @@ const StreetViewComponentView = (props) => {
                         <div style={{
                             background: "#ffffff", padding: "0 10px", margin: "0 auto", maxWidth: "fit-content"
                         }}>
-                            <p style={{ color: "black", margin: "5px 0" }}>{review.comment ? review.comment : undefined}</p>
+                            <p style={{ color: "black", margin: "5px 0", padding: "5px" }}>{review.comment ? review.comment : undefined}</p>
                         </div>
                     )) : undefined
                     }
@@ -87,7 +87,7 @@ const StreetViewComponentView = (props) => {
                         <div style={{
                             background: "#ffffff", padding: "0 10px", margin: "0 auto", maxWidth: "fit-content"
                         }}>
-                            <p style={{ color: "black", margin: "5px 0" }}>{review.text ? review.text : undefined}</p>
+                            <p style={{ color: "black", margin: "5px 0", padding: "5px" }}>{review.text ? review.text : undefined}</p>
                         </div>
                     )) : undefined
                     }
