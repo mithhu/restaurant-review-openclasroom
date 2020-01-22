@@ -79,7 +79,7 @@ const StreetViewComponentView = (props) => {
                     <h1 style={{ color: "#5B5542" }}>Review</h1>
                     {reviewList ? reviewList.map(review => (
                         <div style={{
-                            background: "#ffffff", padding: "5 10px", margin: "5px auto", maxWidth: "fit-content"
+                            background: "#ffffff", padding: "5px 10px", margin: "5px auto", maxWidth: "fit-content"
                         }}>
                             <p style={{ color: "black", margin: "5px 0" }}>{review.comment ? review.comment : undefined}</p>
                         </div>
