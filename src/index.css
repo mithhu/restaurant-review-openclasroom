@@ -88,13 +88,13 @@ code {
     width: 50vw
   }
   .mapElement {
-    width: 50vw;
+    width: 60vw;
   }
   .loadingElement{
-    width: 50vw;
+    width: 60vw;
   }
   .restaurantList{
-    width: 50vw;
+    width: 40vw;
     margin-top: 10px;
     height: 80vh;
     overflow: auto;
@@ -119,5 +119,4 @@ code {
     display: block;
     margin-bottom: 10px;
   }
-
 }
