@@ -163,7 +163,7 @@ const Map = () => {
         <p style={{ color: "red" }}>{errorRating ? errorRating : undefined}</p>
         <form>
           <div>
-            <span style={{ color: "#5B5542" }}> Restaurant start rating: </span>
+            <span style={{ color: "black" }}> Restaurant start rating: </span>
             <input
               type="Number"
               value={startRating}
@@ -173,7 +173,7 @@ const Map = () => {
             />
           </div>
           <div>
-            <span style={{ color: "#5B5542" }}> Restaurant end rating: </span>
+            <span style={{ color: "black" }}> Restaurant end rating: </span>
             <input
               type="Number"
               value={endRating}

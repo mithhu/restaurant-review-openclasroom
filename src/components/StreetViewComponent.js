@@ -79,7 +79,7 @@ const StreetViewComponentView = (props) => {
                         <div style={{
                             background: "#ffffff", padding: "0 10px", margin: "0 auto", maxWidth: "fit-content"
                         }}>
-                            <p style={{ color: "#5B5542", margin: "5px 0" }}>{review.comment ? review.comment : undefined}</p>
+                            <p style={{ color: "black", margin: "5px 0" }}>{review.comment ? review.comment : undefined}</p>
                         </div>
                     )) : undefined
                     }
@@ -87,7 +87,7 @@ const StreetViewComponentView = (props) => {
                         <div style={{
                             background: "#ffffff", padding: "0 10px", margin: "0 auto", maxWidth: "fit-content"
                         }}>
-                            <p style={{ color: "#5B5542", margin: "5px 0" }}>{review.text ? review.text : undefined}</p>
+                            <p style={{ color: "black", margin: "5px 0" }}>{review.text ? review.text : undefined}</p>
                         </div>
                     )) : undefined
                     }

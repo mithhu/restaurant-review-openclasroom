@@ -19,7 +19,7 @@ export const RestaurantList = (props) => {
                     background: "#ffffff", padding: "0 10px", margin: "0 auto", maxWidth: "fit-content", marginBottom: '5px'
                 }}>
                     <NavLink
-                        style={{ marginRight: "20px", color: "#5B5542", textDecoration: "none" }}
+                        style={{ marginRight: "20px", color: "black", textDecoration: "none" }}
                         to={{
                             pathname: `place/?lat=${restaurant.lat}&long=${restaurant.long}`,
                             state: {
@@ -30,7 +30,7 @@ export const RestaurantList = (props) => {
                         }}>
                         {restaurant.restaurantName ? restaurant.restaurantName : "Unknown"}:
                     </NavLink>
-                    <span style={{ color: "#5B5542" }}>
+                    <span style={{ color: "black" }}>
                         {averageStar(restaurant.ratings)}
                     </span>
                 </div>
@@ -42,7 +42,7 @@ export const RestaurantList = (props) => {
                     background: "#ffffff", padding: "0 10px", margin: "0 auto", maxWidth: "fit-content", marginBottom: '5px'
                 }}>
                     <NavLink
-                        style={{ color: "#5B5542", marginRight: "20px", textDecoration: "none" }}
+                        style={{ color: "black", marginRight: "20px", textDecoration: "none" }}
                         to={{
                             pathname: `place/?lat=${restaurant.geometry.location.lat()}&long=${restaurant.geometry.location.lng()}`,
                             state: {
@@ -53,7 +53,7 @@ export const RestaurantList = (props) => {
                         }}>
                         {`${restaurant.name}:`}
                     </NavLink>
-                    <span style={{ color: "#5B5542" }}>
+                    <span style={{ color: "black" }}>
                         {restaurant.rating}
                     </span>
                 </div>
