@@ -5,7 +5,14 @@ import { averageStar } from '../utils.js';
 
 export const RestaurantList = (props) => {
     return (
-        <div className="restaurantList" style={{ textAlign: "center", marginBottom: "5px", paddingTop: "10px", paddingBottom: "10px", background: "#EFEAE5" }}>
+        <div className="restaurantList"
+            style={{
+                textAlign: "center",
+                marginBottom: "5px",
+                paddingTop: "10px",
+                paddingBottom: "10px",
+                background: "#EFEAE5"
+            }}>
             {/* shows local restaurant list */}
             {props.filteredData.map(restaurant => (
                 <div key={restaurant.lat} style={{
@@ -35,7 +42,7 @@ export const RestaurantList = (props) => {
                     background: "#ffffff", padding: "0 10px", margin: "0 auto", maxWidth: "fit-content", marginBottom: '5px'
                 }}>
                     <NavLink
-                        style={{ color: "#5B5542", textDecoration: "none" }}
+                        style={{ color: "#5B5542", marginRight: "20px", textDecoration: "none" }}
                         to={{
                             pathname: `place/?lat=${restaurant.geometry.location.lat()}&long=${restaurant.geometry.location.lng()}`,
                             state: {
@@ -44,7 +51,7 @@ export const RestaurantList = (props) => {
                                 placeId: restaurant.place_id
                             }
                         }}>
-                        {restaurant.name}
+                        {`${restaurant.name}:`}
                     </NavLink>
                     <span style={{ color: "#5B5542" }}>
                         {restaurant.rating}
