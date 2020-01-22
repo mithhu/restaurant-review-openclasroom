@@ -16,7 +16,7 @@ export const RestaurantList = (props) => {
             {/* shows local restaurant list */}
             {props.filteredData.map(restaurant => (
                 <div key={restaurant.lat} style={{
-                    background: "#ffffff", padding: "0 10px", margin: "0 auto", maxWidth: "fit-content", marginBottom: '5px'
+                    background: "#ffffff", padding: "5px 10px", margin: "0 auto", maxWidth: "fit-content", marginBottom: '5px'
                 }}>
                     <NavLink
                         style={{ marginRight: "20px", color: "black", textDecoration: "none" }}
@@ -39,7 +39,7 @@ export const RestaurantList = (props) => {
             {/* shows google restaurant list */}
             {props.googleFilteredData.map(restaurant => (
                 <div key={restaurant.place_id} style={{
-                    background: "#ffffff", padding: "0 10px", margin: "0 auto", maxWidth: "fit-content", marginBottom: '5px'
+                    background: "#ffffff", padding: "5px 10px", margin: "0 auto", maxWidth: "fit-content", marginBottom: '5px'
                 }}>
                     <NavLink
                         style={{ color: "black", marginRight: "20px", textDecoration: "none" }}
