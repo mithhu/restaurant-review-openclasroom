@@ -40,10 +40,7 @@ const StreetViewComponentView = (props) => {
                 lat: props.location.state.lat, lng: props.location.state.lng
             },
             pov: { heading: 100, pitch: 0 },
-            zoom: 1,
-            scrollwheel: false,
-            mapTypeControl: false,
-            draggable: false
+            zoom: 1
         };
     }
     const fetchReview = () => {
