@@ -67,15 +67,28 @@ const Map = () => {
   }
 
   //Gets the current latitude and longitude using gelocation api
-  const getLocation = () => {
-    navigator.geolocation.getCurrentPosition(async position => {
-      let lat = await position.coords.latitude;
-      let lng = await position.coords.longitude;
+  const getCurrentPosition = (options = {}) => {
+    return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(resolve, reject, options);
+    });
+  }
+
+  const getLocation = async () => {
+    try {
+      const { coords } = await getCurrentPosition();
+      const { latitude, longitude } = coords;
+      setLocation({
+        ...location, lat: latitude, lng: longitude
+      })
+      // Handle coordinates
+    } catch (error) {
+      let lat = 23.803773;
+      let lng = 90.367138;
       setLocation({
         ...location, lat, lng
       })
-    })
-  }
+    }
+  };
 
   //Runs when dom renders. Used it to get location and nearest restaurants when when page loads at first 
   useEffect(() => {
@@ -187,7 +200,7 @@ const Map = () => {
       </div>
       <GoogleMap
         defaultZoom={15}
-        center={location === null ? { lat: 10, lng: 20 } : location}
+        center={location}
         onClick={(event) => restaurantForm(event.latLng.lat(), event.latLng.lng())}
         onTilesLoaded={fetchPlaces} //runs when the map loads or changes
         ref={refs}
