@@ -1,56 +1,76 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* background: #0C041C */
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+html {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
+*:focus {
+  outline: none;
+}
+
+a {
+  text-decoration: none;
 }
 
 .myButton {
-	box-shadow: 0px 1px 0px 0px #fff6af;
-	background:linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
-	background-color:#ffec64;
-	border-radius:6px;
-	border:1px solid #ffaa22;
-	display:inline-block;
-	cursor:pointer;
-	color:#333333;
-	font-family:Arial;
-	font-size:15px;
-	font-weight:bold;
-	padding:6px 24px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #ffee66;
+  box-shadow: 0px 1px 0px 0px #fff6af;
+  background: linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
+  background-color: #ffec64;
+  border-radius: 6px;
+  border: 1px solid #ffaa22;
+  display: inline-block;
+  cursor: pointer;
+  color: #333333;
+  font-family: Arial;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 6px 10px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #ffee66;
   outline: none;
+  margin-right: -15px;
 }
 .myButton:hover {
-	background:linear-gradient(to bottom, #ffab23 5%, #ffec64 100%);
-  background-color:#ffab23;
+  background: linear-gradient(to bottom, #ffab23 5%, #ffec64 100%);
+  background-color: #ffab23;
 }
 .myButton:active {
-	position:relative;
-  top:1px;
+  position: relative;
+  top: 1px;
 }
-
+.mapElement {
+  height: 100vh;
+}
 @media only screen and (max-width: 600px) {
   .containerElement {
     display: block;
-    width: 100vw
+    width: 100vw;
   }
   .mapElement {
     width: 100vw;
+    height: 50vh;
   }
-  .loadingElement{
+  .loadingElement {
     width: 100vw;
   }
-  .restaurantList{
+  .restaurantList {
     width: 100vw;
     /* margin-top: 5px; */
   }
@@ -58,7 +78,8 @@ code {
     position: fixed;
     width: 100%;
     top: 0;
-    background: #EFEAE5
+    background: #efeae5;
+    z-index: 100;
   }
   .buttonSubmit {
     margin-top: 10px;
@@ -69,10 +90,10 @@ code {
   }
   .streetViewStyle {
     width: 100vw;
-    height: 90vh;
+    height: 50vh;
   }
   .reviewList {
-    width: 100vw
+    width: 100vw;
   }
   .route {
     display: none;
@@ -85,15 +106,15 @@ code {
 @media only screen and (min-width: 601px) {
   .containerElement {
     display: -webkit-box;
-    width: 50vw
+    width: 50vw;
   }
   .mapElement {
     width: 60vw;
   }
-  .loadingElement{
+  .loadingElement {
     width: 60vw;
   }
-  .restaurantList{
+  .restaurantList {
     width: 40vw;
     margin-top: 10px;
     height: 80vh;
@@ -106,7 +127,7 @@ code {
   .streetView {
     display: flex;
   }
-  .streetViewStyle{
+  .streetViewStyle {
     width: 50vw;
     height: 94vh;
   }
