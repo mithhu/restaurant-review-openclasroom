@@ -1,6 +1,6 @@
 import React from "react";
 import { MapComponent } from "./components/MapComponent";
-import { api_key } from "./utils";
+// import { api_key } from "./utils";
 
 export const Homepage = () => {
   return (
@@ -10,7 +10,7 @@ export const Homepage = () => {
         style={{ width: "100vw", height: "100vh", background: "#EFEAE5" }}
       >
         <MapComponent
-          googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${api_key}`}
+          googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${process.env.REACT_APP_API_KEY}`}
           loadingElement={<div style={{ height: `100%` }} />}
           // loadingElement, which is getting rendered until Google Maps library is finished loading
           containerElement={

@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import ReactStreetview from "react-streetview";
 import { withRouter, Redirect, NavLink } from "react-router-dom";
 import axios from "axios";
-import { api_key } from "../utils";
+// import { api_key } from "../utils";
 
 const StreetViewComponentView = (props) => {
   const googleMapsApiKey = "AIzaSyDGIUkILRvAVhTd5XI4j4M471uNZJmxVLs";
@@ -38,7 +38,7 @@ const StreetViewComponentView = (props) => {
   const fetchReview = () => {
     axios
       .get(
-        `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/details/json?placeid=${props.location.state.placeId}&key=${api_key}`
+        `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/details/json?placeid=${props.location.state.placeId}&key=${process.env.REACT_APP_API_KEY}`
       )
       .then((response) =>
         response.data

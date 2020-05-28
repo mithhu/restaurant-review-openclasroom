@@ -23,7 +23,6 @@ const Map = () => {
   const [restaurantAddress, setRestaurantAddress] = useState("");
   const [lat, setLat] = useState("");
   const [lng, setLng] = useState("");
-  // let filteredData = restaurantInfo.data;
   const [restaurantName, setRestaurantName] = useState("");
   let [restaurantList, setRestaurantList] = useState([]);
   let [restaurantView, setRestaurantView] = useState([]);
