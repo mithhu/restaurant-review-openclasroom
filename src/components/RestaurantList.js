@@ -24,16 +24,20 @@ export const RestaurantList = (props) => {
           style={{
             background: "#ffffff",
             padding: "5px 10px",
-            margin: "0 auto",
-            maxWidth: "fit-content",
+            margin: "5px 20px",
+            flex: 1,
             marginBottom: "5px",
+            boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2)",
+            borderRadius: "5px",
           }}
         >
           <NavLink
             style={{
-              marginRight: "20px",
               color: "black",
+              marginRight: "20px",
               textDecoration: "none",
+              fontSize: "large",
+              fontWeight: 500,
             }}
             to={{
               pathname: `place/?lat=${restaurant.lat}&long=${restaurant.long}`,
@@ -44,11 +48,18 @@ export const RestaurantList = (props) => {
               },
             }}
           >
-            {restaurant.restaurantName ? restaurant.restaurantName : "Unknown"}:
+            {restaurant.restaurantName ? "Mithhu" : "Unknown"}
           </NavLink>
-          <span style={{ color: "black" }}>
-            {averageStar(restaurant.ratings)}
-          </span>
+          <div>
+            <StarRatings
+              rating={averageStar(restaurant.ratings)}
+              starRatedColor="#FFD74F"
+              numberOfStars={5}
+              name="rating"
+              starDimension="20px"
+              starSpacing="5px"
+            />
+          </div>
         </div>
       ))}
       {props.googleFilteredData.map((restaurant) => (

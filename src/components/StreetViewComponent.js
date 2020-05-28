@@ -2,10 +2,8 @@ import React, { useEffect, useState, useRef } from "react";
 import ReactStreetview from "react-streetview";
 import { withRouter, Redirect, NavLink } from "react-router-dom";
 import axios from "axios";
-// import { api_key } from "../utils";
 
 const StreetViewComponentView = (props) => {
-  const googleMapsApiKey = "AIzaSyDGIUkILRvAVhTd5XI4j4M471uNZJmxVLs";
   const [review, setReview] = useState("");
   let [googleReviewList, setGoogleReviewList] = useState([]);
   const refs = useRef();
@@ -40,11 +38,11 @@ const StreetViewComponentView = (props) => {
       .get(
         `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/details/json?placeid=${props.location.state.placeId}&key=${process.env.REACT_APP_API_KEY}`
       )
-      .then((response) =>
+      .then((response) => {
         response.data
           ? setGoogleReviewList(response.data.result.reviews)
-          : setGoogleReviewList("Not Found")
-      )
+          : setGoogleReviewList("Not Found");
+      })
       .catch((err) => {
         console.log(err); //Axios entire error message
         console.log(err.response.data.error); //Google API error message
@@ -74,7 +72,7 @@ const StreetViewComponentView = (props) => {
         >
           {props.location.state ? (
             <ReactStreetview
-              apiKey={googleMapsApiKey}
+              apiKey={process.env.REACT_APP_API_KEY}
               streetViewPanoramaOptions={streetViewPanoramaOptions}
               ref={refs}
             />
@@ -107,6 +105,7 @@ const StreetViewComponentView = (props) => {
             {googleReviewList.length > 0
               ? googleReviewList.map((review) => (
                   <div
+                    key={review.author_url}
                     style={{
                       background: "#ffffff",
                       padding: "5px 10px",

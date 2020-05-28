@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
 import React, { useState, useEffect, useRef } from "react";
 import { NavLink } from "react-router-dom";
-// import * as restaurantInfo from '../restaurant.json';
 import {
   withGoogleMap,
   withScriptjs,
@@ -109,7 +108,7 @@ const Map = () => {
   }, []);
 
   //To add restaurant both on the map and restaurant list
-  const addRestaurant = async (e) => {
+  const addRestaurant = (e) => {
     e.preventDefault();
     setErrorAddRestaurant("");
     if (!restaurantName) {
@@ -135,12 +134,13 @@ const Map = () => {
         },
       ];
       setRestaurantList(restaurantList);
-      let newVal = await restFilter();
+      let newVal = restFilter();
       setRestaurantView(newVal);
       setModalOpen(false);
       setRestaurantName("");
       setStar("");
       setRestaurantReview("");
+      setRestaurantAddress("");
     }
   };
 

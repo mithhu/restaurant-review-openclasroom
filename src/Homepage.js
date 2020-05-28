@@ -1,6 +1,5 @@
 import React from "react";
 import { MapComponent } from "./components/MapComponent";
-// import { api_key } from "./utils";
 
 export const Homepage = () => {
   return (
