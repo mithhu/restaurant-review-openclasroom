@@ -43,6 +43,7 @@ const Map = () => {
     );
     return val;
   };
+  
   //Filters out google restaurants using ratings
   const googleRestFilter = (results = googleRestaurant) => {
     let val = results.filter(
